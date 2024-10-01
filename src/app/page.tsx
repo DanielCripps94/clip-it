@@ -1,2 +1,2 @@
-import LandingPage from "@/2-pages/home";
+import LandingPage from "@/layers/2-pages/home";
 export default LandingPage;

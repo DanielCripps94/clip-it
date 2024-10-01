@@ -1,2 +1,2 @@
-import SignupPage from "@/2-pages/signup";
+import SignupPage from "@/layers/2-pages/signup";
 export default SignupPage;
