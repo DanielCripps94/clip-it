@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Monitor, Menu } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -13,6 +14,8 @@ const navItems = [
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session, status } = useSession();
+  console.log(session, status, "SESSION HERE-----------------------");
 
   return (
     <nav className="bg-gray-800 py-4">

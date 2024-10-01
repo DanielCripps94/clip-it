@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Upload, ThumbsUp } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 const featuredGames = [
   "Valorant",
@@ -17,6 +19,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white font-inter">
       <main className="container mx-auto px-4 py-16 space-y-16">
         <section className="text-center space-y-6">
+          <h1 className="text-5xl font-bold leading-tight"></h1>
           <h1 className="text-5xl font-bold leading-tight">
             Share Your Epic Gaming Moments
           </h1>

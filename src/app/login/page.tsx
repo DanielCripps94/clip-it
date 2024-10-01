@@ -19,20 +19,26 @@ import { Gamepad2, LogIn } from "lucide-react";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // State for error handling
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(""); // Reset error state on each submit
+
     const result = await signIn("credentials", {
-      username,
+      email: username,
       password,
       redirect: false,
     });
 
+    console.log(result, "RESULT HERE-----------------------");
+
     if (result?.error) {
+      setError(result.error);
       console.error(result.error);
     } else {
-      router.push("/dashboard");
+      router.push("/");
     }
   };
 

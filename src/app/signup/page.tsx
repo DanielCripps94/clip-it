@@ -19,14 +19,45 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(""); // For error handling
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically make an API call to create a new user
-    console.log("Signup data:", { username, email, password });
-    // For now, we'll just redirect to the login page
-    router.push("/login");
+
+    // Basic client-side validation
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      // Make an API call to create a new user
+      const res = await fetch("/api/user/create", {
+        // Update to your API route
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: username, // Adjust field names as per your backend
+          email,
+          password,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.message || "Something went wrong!");
+        return;
+      }
+
+      // Redirect to the login page on successful signup
+      router.push("/login");
+    } catch (err) {
+      console.error(err);
+      setError("An error occurred. Please try again.");
+    }
   };
 
   return (
