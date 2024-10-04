@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Monitor, Menu } from "lucide-react";
 import { useSession } from "next-auth/react";
+import { Avatar } from "./ui/avatar";
+import { AvatarFallback } from "@radix-ui/react-avatar";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -64,6 +66,11 @@ export function NavBar() {
                   <span>{item.label}</span>
                 </Link>
               ))}
+              <Avatar className="bg-gradient-to-r flex flex items-center justify-center from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-bold py-2 px-4 transition-all duration-200 ease-in-out transform hover:scale-105 hover:shadow-lg">
+                <AvatarFallback>
+                  {session?.user?.name?.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
             </div>
 
             {/* Mobile Navigation */}
@@ -75,7 +82,10 @@ export function NavBar() {
                     <span className="sr-only">Toggle menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <SheetContent
+                  side="right"
+                  className="w-[300px] sm:w-[400px] bg-gradient-to-br from-gray-900 to-black text-white font-inter border-gray-700"
+                >
                   <nav className="flex flex-col space-y-4">
                     {navItems.map((item) => (
                       <Link

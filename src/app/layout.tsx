@@ -1,9 +1,10 @@
 "use client";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "../layers/1-app/globals.css";
 import { NavBar } from "@/components/nav-bar";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,7 +41,6 @@ export default function RootLayout({
             <NavBar />
             {children}
           </SessionProvider>
-
           {/* </ThemeProvider> */}
         </div>
       </body>

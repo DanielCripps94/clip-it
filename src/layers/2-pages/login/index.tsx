@@ -30,6 +30,7 @@ export default function LoginPage() {
       email: username,
       password,
       redirect: false,
+      callbackUrl: "/login",
     });
 
     if (result?.error) {

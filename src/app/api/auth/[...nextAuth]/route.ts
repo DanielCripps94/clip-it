@@ -60,18 +60,18 @@ const options: NextAuthOptions = {
     error: "/login",
   },
   callbacks: {
-    async session({ session, token }) {
-      if (token.user) {
-        session.user = { ...token.user };
-      }
-      return session;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.user = user;
-      }
-      return token;
-    },
+    // async session({ session, token }) {
+    //   if (token.user) {
+    //     session.user = { ...token.user };
+    //   }
+    //   return session;
+    // },
+    // async jwt({ token, user }) {
+    //   if (user) {
+    //     token.user = user;
+    //   }
+    //   return token;
+    // },
   },
 };
 
