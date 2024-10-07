@@ -5,10 +5,10 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import {
   Form,
-  FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -54,14 +54,12 @@ export const LoginForm = ({ submitFormElement }: LoginFormProps) => {
             render={({ field }) => (
               <FormItem className="flex flex-col space-y-1.5">
                 <FormLabel className="text-gray-300">Username</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    id="username"
-                    placeholder="Enter your gamer tag"
-                    className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
-                  />
-                </FormControl>
+                <Input
+                  {...field}
+                  id="username"
+                  placeholder="Enter your gamer tag"
+                  className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
+                />
               </FormItem>
             )}
           />
@@ -71,15 +69,14 @@ export const LoginForm = ({ submitFormElement }: LoginFormProps) => {
             render={({ field }) => (
               <FormItem className="flex flex-col space-y-1.5">
                 <FormLabel className="text-gray-300">Password</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
-                  />
-                </FormControl>
+                <Input
+                  {...field}
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
+                />
+                <FormMessage />
               </FormItem>
             )}
           />

@@ -3,14 +3,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   Form,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { signUpFormSchema } from "@/layers/5-entities/schemas/auth-schemas/signup-schema";
+import { RHFPasswordInput } from "@/layers/6-shared/rhf-password-input/facade";
 
 export interface SignUpFormProps {
   submitFormElement: React.ReactNode;
@@ -19,18 +21,22 @@ export interface SignUpFormProps {
 export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
   const router = useRouter();
 
-  const signUpFormSchema = z.object({
-    username: z.string(),
-    email: z.string().email(),
-    password: z.string(),
-    confirmPassword: z.string(),
-  });
-
   const form = useForm<z.infer<typeof signUpFormSchema>>({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
     resolver: zodResolver(signUpFormSchema),
   });
 
-  const { handleSubmit, control } = form;
+  const {
+    handleSubmit,
+    control,
+    watch,
+    formState: { errors },
+  } = form;
 
   const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
     const { username, email, password } = values;
@@ -55,7 +61,6 @@ export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
         const data = await res.json();
         return;
       }
-
       router.push("/login");
     } catch (err) {
       console.error(err);
@@ -73,14 +78,15 @@ export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-1.5">
                   <FormLabel className="text-gray-300">Username</FormLabel>
-                  <FormControl>
+                  <div>
                     <Input
                       {...field}
                       id="username"
                       placeholder="Enter your gamer tag"
                       className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
                     />
-                  </FormControl>
+                    <FormMessage className="text-xs border-x border-b border-red-600 mt-0 rounded-b-md py-1 px-2" />
+                  </div>
                 </FormItem>
               )}
             />
@@ -92,7 +98,7 @@ export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-1.5">
                   <FormLabel className="text-gray-300">Email</FormLabel>
-                  <FormControl>
+                  <div>
                     <Input
                       {...field}
                       id="email"
@@ -100,7 +106,8 @@ export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
                       placeholder="Enter your email"
                       className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
                     />
-                  </FormControl>
+                    <FormMessage className="text-xs border-x border-b border-red-600 mt-0 rounded-b-md py-1 px-2" />
+                  </div>
                 </FormItem>
               )}
             />
@@ -110,18 +117,12 @@ export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
               control={control}
               name="password"
               render={({ field }) => (
-                <FormItem className="flex flex-col space-y-1.5">
-                  <FormLabel className="text-gray-300">Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      id="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
-                    />
-                  </FormControl>
-                </FormItem>
+                <RHFPasswordInput
+                  watch={watch}
+                  errors={errors}
+                  label="Password"
+                  field={field}
+                />
               )}
             />
           </div>
@@ -134,7 +135,7 @@ export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
                   <FormLabel className="text-gray-300">
                     Confirm Password
                   </FormLabel>
-                  <FormControl>
+                  <div>
                     <Input
                       {...field}
                       id="confirmPassword"
@@ -142,7 +143,8 @@ export const SignUpForm = ({ submitFormElement }: SignUpFormProps) => {
                       placeholder="Confirm your password"
                       className="bg-gray-700/50 border-gray-600 text-gray-100 placeholder-gray-500 focus:border-teal-500 focus:ring-teal-500"
                     />
-                  </FormControl>
+                    <FormMessage className="text-xs border-x border-b border-red-600 mt-0 rounded-b-md py-1 px-2" />
+                  </div>
                 </FormItem>
               )}
             />
