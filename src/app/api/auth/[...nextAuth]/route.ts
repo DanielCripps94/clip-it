@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../../../lib/prisma";
 
 // Define your options for NextAuth
-const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -75,7 +75,7 @@ const options: NextAuthOptions = {
   },
 };
 
-const handler = NextAuth(options);
+const handler = NextAuth(authOptions);
 
 // Use the new API route handler
 export { handler as GET, handler as POST };

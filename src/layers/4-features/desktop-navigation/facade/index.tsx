@@ -1,4 +1,3 @@
-"use client";
 import { NavItem, NavItems } from "@/layers/5-entities/nav-items";
 import Link from "next/link";
 
