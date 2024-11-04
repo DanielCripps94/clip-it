@@ -9,6 +9,12 @@ const navItems = [
   { href: "/clips", label: "Clips" },
 ] as const satisfies readonly NavItem[];
 
+const loggedInNavItems = [
+  { href: "/profile", label: "Profile" },
+  { href: "/upload", label: "Upload" },
+  { href: "/logout", label: "Logout" },
+];
+
 // const navItems = [
 //   { href: "/", label: "Home" },
 //   { href: "/games", label: "Games" },

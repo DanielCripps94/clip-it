@@ -23,6 +23,13 @@ export default function LandingPage() {
         />
       }
     >
+      <video width="1920" height="1080" controls>
+        <source
+          src="https://clipit-video-bucket.s3.eu-north-1.amazonaws.com/videos/60baf150-146b-4b69-8e47-b84381e36693"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
       <LandingCards />
     </LandingContainer>
   );

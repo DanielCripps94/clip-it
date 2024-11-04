@@ -24,6 +24,10 @@ export const LoginForm = ({ submitFormElement }: LoginFormProps) => {
     password: z.string(),
   });
   const form = useForm<z.infer<typeof loginFormSchema>>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
     resolver: zodResolver(loginFormSchema),
   });
 

@@ -15,33 +15,32 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials || !credentials.email || !credentials.password) {
-          return null;
+          throw new Error("Missing email or password");
         }
 
-        // Prepare user credentials for login
         const userCredentials = {
           email: credentials.email,
           password: credentials.password,
         };
 
-        // Fetch the user from your backend or API
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/user/auth`,
-          {
-            method: "POST",
-            body: JSON.stringify(userCredentials),
-            headers: {
-              "Content-Type": "application/json",
-            },
+        try {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/user/auth`,
+            {
+              method: "POST",
+              body: JSON.stringify(userCredentials),
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+          if (res.ok) {
+            return await res.json();
+          } else {
+            const errorData = await res.json();
+            throw new Error(errorData.message || "Invalid email or password");
           }
-        );
-
-        const user = await res.json();
-
-        if (res.ok && user) {
-          return user;
-        } else {
-          return null;
+        } catch (error: any) {
+          console.error("Authorization error:", error.message);
+          throw new Error(error.message || "Authorization failed");
         }
       },
     }),
