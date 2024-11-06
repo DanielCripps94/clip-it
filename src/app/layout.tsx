@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../layers/1-app/globals.css";
 import { NavBar } from "@/layers/3-widgets/nav-bar/facade";
-import { useQueryClient } from "@tanstack/react-query";
+import Providers from "@/layers/5-entities/providers/query-client-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,14 +25,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = useQueryClient();
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="bg-gradient-to-br from-gray-900 to-black">
-          <NavBar />
-          {children}
+        <NavBar />
+        <div className="bg-gradient-to-br from-gray-900 to-black px-4">
+          <Providers>{children}</Providers>
         </div>
       </body>
     </html>

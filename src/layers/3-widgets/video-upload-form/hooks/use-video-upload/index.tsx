@@ -3,7 +3,7 @@ import { uploadVideo } from "../../api/upload-video";
 
 export const useVideoUpload = () => {
   const query = useMutation({
-    mutationFn: uploadVideo,
+    mutationFn: ({ data }: { data: any }) => uploadVideo(data),
     mutationKey: ["UPLOAD_VIDEO"],
     onSuccess: (data) => {
       console.log("Uploaded video data:", data);

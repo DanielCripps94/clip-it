@@ -21,14 +21,12 @@ const s3Client = new S3Client({
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-
   if (!session || !session.user || !session.user.email) {
     return NextResponse.json(
       { message: "Unauthorized. Please log in to upload videos." },
       { status: 401 }
     );
   }
-
   const formData = await req.formData();
   const title = formData.get("title") as string;
   const description = formData.get("description") as string | null;
