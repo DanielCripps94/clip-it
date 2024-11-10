@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { TextInput } from "@/layers/6-shared/inputs/text-input/text-input";
 import { TextArea } from "@/layers/6-shared/inputs/textarea-input.tsx";
 import { SelectInput } from "@/layers/6-shared/inputs/select-input";
+import { useGetGames } from "@/layers/5-entities/get-games";
 
 interface UploadFormProps {
   videoDropComponent: React.ReactNode;
@@ -16,6 +17,16 @@ export const UploadForm = ({
   submitActionElement,
 }: UploadFormProps) => {
   const { control } = useFormContext();
+  const { data: games, isLoading } = useGetGames();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!games) {
+    return <div>No games found</div>;
+  }
+
   return (
     <div className="flex flex-col space-y-4 justify-center">
       <CardContent className="p-1">
@@ -37,13 +48,10 @@ export const UploadForm = ({
             label="Game"
             placeholder="Select the game"
             control={control}
-            options={[
-              { value: "csgo", label: "Counter-Strike: Global Offensive" },
-              { value: "valorant", label: "Valorant" },
-              { value: "fortnite", label: "Fortnite" },
-              { value: "apex", label: "Apex Legends" },
-              { value: "overwatch", label: "Overwatch" },
-            ]}
+            options={games?.map((game) => ({
+              value: game.id,
+              label: game.label,
+            }))}
           />
         </div>
       </CardContent>

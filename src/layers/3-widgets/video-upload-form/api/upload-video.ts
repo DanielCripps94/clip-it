@@ -1,12 +1,14 @@
 export const uploadVideo = async (data: any) => {
   console.log("Uploading video data:", data);
-  const { title, description, file } = data;
+  const { title, description, file, game } = data;
   const formData = new FormData();
 
   formData.append("file", file);
   formData.append("title", title);
   formData.append("description", description);
   formData.append("published", "true");
+  formData.append("gameId", game);
+
 
   try {
     const response = await fetch("/api/videos/upload", {

@@ -32,6 +32,7 @@ export async function POST(req: Request) {
   const description = formData.get("description") as string | null;
   const published = formData.get("published") === "true";
   const file = formData.get("file") as Blob;
+  const gameId = formData.get("gameId") as string;
 
   if (!title || !file) {
     return NextResponse.json(
@@ -48,9 +49,20 @@ export async function POST(req: Request) {
     where: { email: session.user.email },
   });
 
+  const game = await prisma.game.findUnique({
+    where: { id: gameId },
+  });
+
   if (!user) {
     return NextResponse.json(
       { message: "User not found. Cannot upload video." },
+      { status: 404 }
+    );
+  }
+
+  if (!game) {
+    return NextResponse.json(
+      { message: "Game not found. Cannot upload video." },
       { status: 404 }
     );
   }
@@ -62,6 +74,7 @@ export async function POST(req: Request) {
         url,
         description,
         published,
+        game: { connect: { id: game.id } },
         author: { connect: { id: user.id } },
       },
     });

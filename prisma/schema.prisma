@@ -37,6 +37,7 @@ model Game {
   id        String   @id @default(cuid())
   name      String   @unique
   label     String   @unique
+  imageUrl  String? 
   videos    Video[]
 
   @@map("games")

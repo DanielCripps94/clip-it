@@ -1,25 +1,45 @@
-const featuredGames = [
-  "Valorant",
-  "League of Legends",
-  "Apex Legends",
-  "Call of Duty",
-  "Fortnite",
-  "CS:GO",
-];
+import { useGetGames } from "@/layers/5-entities/get-games";
+import Image from "next/image";
+import Link from "next/link";
 
 export const GamesDisplay = () => {
+  const { data: games, isLoading } = useGetGames();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!games) {
+    return <div>No games found</div>;
+  }
   return (
     <section className="text-center space-y-6">
-      <h2 className="text-3xl font-bold">Featured Games</h2>
-      <div className="flex flex-wrap justify-center gap-4">
-        {featuredGames.map((game) => (
-          <span
-            key={game}
-            className="bg-gray-700 px-4 py-2 rounded-full text-sm"
-          >
-            {game}
-          </span>
-        ))}
+      <div className="container mx-auto px-4">
+        <h2 className="text-2xl font-bold mb-6">Game Categories</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {games.map((category) => (
+            <Link key={category.id} href={`/category/${category.id}`}>
+              <div className="group relative aspect-[3/4] overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105">
+                <Image
+                  src={category.imageUrl || ""}
+                  alt={`${category.name} cover`}
+                  fill
+                  loading={"lazy"}
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                  className="object-cover"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-0 left-0 right-0 p-2">
+                  <h3 className="text-white text-center font-semibold text-sm sm:text-base">
+                    {category.label}
+                  </h3>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );
