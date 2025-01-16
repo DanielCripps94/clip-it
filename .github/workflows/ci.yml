@@ -23,17 +23,21 @@ jobs:
         with:
           node-version: 18
 
-      # Step 3: Install dependencies
+      # Step 3: Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 4: Run linting and tests
+      # Step 5: Run linting and tests
       - name: Run linting
         run: pnpm run lint
 
       - name: Run tests
         run: pnpm test
 
-      # Step 5: Build the app
+      # Step 6: Build the app
       - name: Build the app
         run: pnpm run build
