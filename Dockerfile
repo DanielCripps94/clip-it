@@ -1,31 +1,23 @@
-# Step 1: Use the official Node.js image
-FROM node:18-alpine AS builder
+# Use node:18-alpine as the base image
+FROM node:18-alpine
 
-# Step 2: Set working directory
+# Install pnpm globally
+RUN npm install -g pnpm
+
+# Set the working directory
 WORKDIR /app
 
-# Step 3: Copy package files and install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
+# Copy only the package.json and lock file first (leverage Docker caching)
+COPY package.json pnpm-lock.yaml ./
 
-# Step 4: Copy all source files
+# Install dependencies with pnpm
+RUN pnpm install
+
+# Copy the rest of the application source code
 COPY . .
 
-# Step 5: Build the Next.js application
-RUN npm run build
-
-# Step 6: Use a lightweight image for production
-FROM node:18-alpine AS runner
-
-# Set working directory
-WORKDIR /app
-
-# Copy the built app and node_modules
-COPY --from=builder /app/package.json /app/package-lock.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-
-# Expose port and set command
+# Expose the required port
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+
+# Start the application
+CMD ["pnpm", "start"]
