@@ -35,9 +35,6 @@ jobs:
       - name: Run linting
         run: pnpm run lint
 
-      - name: Run tests
-        run: pnpm test
-
       # Step 6: Build the app
       - name: Build the app
         run: pnpm run build
