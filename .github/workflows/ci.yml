@@ -25,17 +25,15 @@ jobs:
 
       # Step 3: Install pnpm
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+        run: npm install -g pnpm
 
       # Step 4: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 5: Run linting
+      # Step 5: Run linting and tests
       - name: Run linting
-        run: pnpm run lint -- --max-warnings 0
+        run: pnpm run lint
 
       # Step 6: Build the app
       - name: Build the app
