@@ -15,17 +15,15 @@ export const GamesDisplay = () => {
   return (
     <section className="text-center space-y-6">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl font-bold mb-6">Game Categories</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8 max-w-[1040px] mx-auto">
           {games.map((category) => (
-            <Link key={category.id} href={`/category/${category.id}`}>
-              <div className="group relative aspect-[3/4] overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105">
+            <div className="group relative aspect-[3/4] overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105">
+              <Link key={category.id} href={`/category/${category.id}`}>
                 <Image
                   src={category.imageUrl || ""}
                   alt={`${category.name} cover`}
                   fill
                   loading={"lazy"}
-                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                   className="object-cover"
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
@@ -36,8 +34,8 @@ export const GamesDisplay = () => {
                     {category.label}
                   </h3>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
