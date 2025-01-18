@@ -1,15 +1,9 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "../../../../../lib/prisma";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { randomUUID } from "crypto";
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+import { authOptions } from "~/auth-settings";
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION,

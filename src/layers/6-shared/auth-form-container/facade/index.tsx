@@ -15,7 +15,7 @@ export const AuthFormContainer = ({
   footerElement,
 }: AuthFormContainerProps) => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="absolute opacity-10"></div>
       <Card className="w-[400px] bg-gray-800/50 backdrop-blur-sm border border-gray-700 shadow-2xl">
         <AuthFormHeader authTitle={authTitle} authSubtitle={authSubtitle} />

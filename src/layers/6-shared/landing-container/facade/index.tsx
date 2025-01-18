@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import { LandingContent } from "../../landing-content/facade";
 import { GamesDisplay } from "@/layers/4-features/games-display";
 
@@ -13,9 +14,11 @@ export default function LandingContainer({
   children,
   landingFooter,
 }: LandingPageProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white font-inter">
-      <main className="container mx-auto px-4 py-16 space-y-12">
+    <div className="min-h-screen relative text-white font-inter">
+      <main className="container relative z-10 mx-auto px-4 py-16 space-y-12">
         {landingHeader}
         <GamesDisplay />
         <LandingContent>{children}</LandingContent>

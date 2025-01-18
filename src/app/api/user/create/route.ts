@@ -1,11 +1,7 @@
 import { NextResponse } from "next/server";
-import { SHA256 as sha256 } from "crypto-js";
-import { prisma } from "../../../../../lib/prisma";
+ import { prisma } from "../../../../../lib/prisma";
 import { Prisma } from "@prisma/client";
-
-export const hashPassword = (password: string) => {
-  return sha256(password).toString();
-};
+import { hashPassword } from "@/layers/6-shared/helpers/hash-password";
 
 export async function POST(req: Request) {
   const errors: string[] = [];

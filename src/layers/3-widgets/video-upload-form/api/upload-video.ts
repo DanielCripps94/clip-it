@@ -9,7 +9,6 @@ export const uploadVideo = async (data: any) => {
   formData.append("published", "true");
   formData.append("gameId", game);
 
-
   try {
     const response = await fetch("/api/videos/upload", {
       method: "POST",

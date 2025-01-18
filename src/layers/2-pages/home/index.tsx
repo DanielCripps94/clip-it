@@ -13,7 +13,7 @@ export default function LandingPage() {
     <LandingContainer
       landingHeader={
         <LandingHeader
-          actionElement={<StartUploadingButton buttonText="Start Uploading" />}
+          actionElement={<StartUploadingButton buttonText="Sign up now" />}
           headerElement={"Share Your Epic Gaming Moments"}
           subElement={
             "Upload your best clips, get votes from the community, and win monthly prizes!"

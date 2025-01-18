@@ -17,7 +17,10 @@ export const GamesDisplay = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8 max-w-[1040px] mx-auto">
           {games.map((category) => (
-            <div className="group relative aspect-[3/4] overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105">
+            <div
+              key={category.id}
+              className="group relative aspect-[3/4] overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105"
+            >
               <Link key={category.id} href={`/category/${category.id}`}>
                 <Image
                   src={category.imageUrl || ""}

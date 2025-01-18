@@ -4,7 +4,7 @@ import { MobileNavigation } from "@/layers/4-features/mobile-navigation/facade";
 import { navItems } from "@/layers/5-entities/nav-items";
 import { UserAvatar } from "@/layers/4-features/user-avatar/facade";
 import { getServerSession, Session } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "~/auth-settings";
 
 interface NavBarProps {
   session: Session | null | undefined;

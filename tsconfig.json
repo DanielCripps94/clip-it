@@ -25,7 +25,8 @@
       "~/widgets/*": ["./src/layers/3-widgets/*"],
       "~/features/*": ["./src/layers/4-features/*"],
       "~/entities/*": ["./src/layers/5-entities/*"],
-      "~/shared/*": ["./src/layers/6-shared/*"]
+      "~/shared/*": ["./src/layers/6-shared/*"],
+      "~/auth-settings": ["./auth.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

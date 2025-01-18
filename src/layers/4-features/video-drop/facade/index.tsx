@@ -10,7 +10,7 @@ interface VideoDropzoneProps {
   handleUpload: (acceptedFiles: File[]) => void;
   uploading: boolean;
   control: Control<
-    { title: string; description: string; game: string; file: {} },
+    { title: string; description: string; game: string; file: null },
     any
   >;
 }

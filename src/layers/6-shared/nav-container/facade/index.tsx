@@ -14,12 +14,8 @@ export const NavContainer = ({
 }: NavContainerProps) => {
   const { visible } = useNavScroll();
   return (
-    <nav
-      className={`fixed w-full transition-transform duration-300 z-50 ${
-        visible ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <div className="bg-gray-800 py-4">
+    <nav>
+      <div className="py-4">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <Link
