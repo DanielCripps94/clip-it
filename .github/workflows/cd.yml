@@ -22,12 +22,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 3: Build and push Docker image
+      # Step 3: Set lowercase owner name
+      - name: Set lowercase owner name
+        run: echo "OWNER_LOWERCASE=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      # Step 4: Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           file: Dockerfile
           push: true
-          # Correctly tag the image for GitHub Container Registry with lowercase repository name
-          tags: ghcr.io/${{ github.repository_owner | lowercase }}/clip-it
+          tags: ghcr.io/${{ env.OWNER_LOWERCASE }}/clip-it
