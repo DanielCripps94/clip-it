@@ -9,16 +9,20 @@ import { UploadSubmitButton } from "@/layers/4-features/upload-submit-button/fac
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+const isFileAvailable = typeof File !== "undefined";
+
 export const uploadVideoSchema = z.object({
   title: z.string().nonempty("Title is required"),
   description: z.string().nonempty("Description is required"),
   game: z.string().nonempty("Game is required"),
-  file: z
-    .instanceof(File)
-    .nullable()
-    .refine((file) => file === null || file.size > 0, {
-      message: "File is required",
-    }),
+  file: isFileAvailable
+    ? z
+        .instanceof(File)
+        .nullable()
+        .refine((file) => file === null || file.size > 0, {
+          message: "File is required",
+        })
+    : z.any().nullable(),
 });
 
 export type UploadVideoSchema = z.infer<typeof uploadVideoSchema>;
