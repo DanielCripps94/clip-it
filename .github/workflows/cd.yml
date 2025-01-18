@@ -14,8 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Log in to DockerHub or GitHub Container Registry
-      - name: Log in to DockerHub
+      # Step 2: Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -29,4 +29,5 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: your-dockerhub-username/next15-app:latest
+          # Correctly tag the image for GitHub Container Registry
+          tags: ghcr.io/${{ github.repository_owner }}/next15-app:latest
