@@ -29,5 +29,5 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          # Correctly tag the image for GitHub Container Registry
-          tags: ghcr.io/${{ github.repository_owner.toLowerCase() }}/clip-it
+          # Correctly tag the image for GitHub Container Registry with lowercase repository name
+          tags: ghcr.io/${{ github.repository_owner | lowercase }}/clip-it
