@@ -47,4 +47,4 @@ jobs:
           vercel login --token $VERCEL_TOKEN
 
           # Deploy to Vercel
-          vercel --prod --token $VERCEL_TOKEN
+          vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
