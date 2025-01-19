@@ -38,7 +38,7 @@ export const LoginForm = ({ submitFormElement }: LoginFormProps) => {
       email: values.username,
       password: values.password,
       redirect: false,
-      callbackUrl: "/login",
+      // callbackUrl: "/login",
     });
     if (result?.error) {
       //   setError(result.error);
