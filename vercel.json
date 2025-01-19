@@ -1,17 +1,9 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/node"
-      }
-    ],
-    "env": {
-      "DATABASE_URL": "@your_database_url_env_key"
-    },
-    "functions": {
-      "api/**/*.js": {
-        "includeFiles": ["prisma/schema.prisma", ".env"]
-      }
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
     }
-  }
+  ]
+}
