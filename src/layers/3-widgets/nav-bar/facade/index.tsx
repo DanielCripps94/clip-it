@@ -11,13 +11,13 @@ interface NavBarProps {
 }
 
 export async function NavBar() {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
   return (
     <NavContainer
       desktopNavigationElement={
         <DesktopNavigation
           navItems={navItems}
-          avatarELement={session && <UserAvatar session={session} />}
+          // avatarELement={session && <UserAvatar session={session} />}
         />
       }
       mobileNavigationElement={<MobileNavigation navItems={navItems} />}

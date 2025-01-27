@@ -8,7 +8,7 @@ import { LandingCards } from "@/layers/4-features/landing-cards";
 import { useGetGames } from "@/layers/5-entities/get-games";
 
 export default function LandingPage() {
-  const { data, error } = useGetGames();
+  // const { data, error } = useGetGames();
   return (
     <LandingContainer
       landingHeader={
