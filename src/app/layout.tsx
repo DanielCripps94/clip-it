@@ -26,6 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log(process.env.NEXTAUTH_SECRET, "SEEEEE MEEEEE");
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
