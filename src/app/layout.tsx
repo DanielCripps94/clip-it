@@ -4,6 +4,7 @@ import "../layers/1-app/globals.css";
 import { NavBar } from "@/layers/3-widgets/nav-bar/facade";
 import Providers from "@/layers/5-entities/providers/query-client-provider";
 import Image from "next/image";
+import { version } from "next/package.json";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,6 +28,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   console.log(process.env.NEXTAUTH_SECRET, "SEEEEE MEEEEE");
+  console.log(process.env.NEXTAUTH_URL, "SEEEEEURLLLLLL");
+  console.log("Next.js version:", version);
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
