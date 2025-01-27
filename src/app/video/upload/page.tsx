@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoUploadWidget } from "@/layers/3-widgets/video-upload-form";
+// import { VideoUploadWidget } from "@/layers/3-widgets/video-upload-form";
 import { AuthFormContainer } from "@/layers/6-shared/auth-form-container";
 
 const VideoUploadPage = () => {
@@ -8,7 +8,7 @@ const VideoUploadPage = () => {
       authTitle="Upload Your Video"
       authSubtitle="Upload your video to share with the community"
     >
-      <VideoUploadWidget />
+      {/* <VideoUploadWidget /> */}
     </AuthFormContainer>
   );
 };
