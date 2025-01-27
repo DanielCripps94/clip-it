@@ -6,6 +6,7 @@ import prisma from "../../../../../lib/prisma";
 export const runtime = "nodejs";
 
 const authOptions = {
+  debug: true,
   providers: [
     CredentialsProvider({
       name: "Credentials",
