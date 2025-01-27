@@ -44,7 +44,7 @@ export const LoginForm = ({ submitFormElement }: LoginFormProps) => {
       //   setError(result.error);
       console.error(result.error);
     } else {
-      // router.push("/");
+      router.push("/");
     }
   };
 
