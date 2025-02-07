@@ -1,28 +1,9 @@
-import { NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-import type { NextRequest } from "next/server";
+import { composeMiddleware } from "./middlewares/chain";
+import { AuthMiddleware } from "./middlewares/auth-middleware";
 
-const publicPaths = ["/login", "/signup"];
+const middlewares = [AuthMiddleware];
 
-const privatePaths = ["/my-videos", "/my-profile"];
-
-export async function middleware(req: NextRequest) {
-  const token = await getToken({ req });
-  const isAuthPage = publicPaths.includes(req.nextUrl.pathname);
-  const isPrivatePage = privatePaths.includes(req.nextUrl.pathname);
-
-  if (token && isAuthPage) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
-
-  if (!token && isPrivatePage) {
-    const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", req.url);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  return NextResponse.next();
-}
+export default composeMiddleware(middlewares);
 
 export const config = {
   matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico).*)"],
